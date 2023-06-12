@@ -4,13 +4,21 @@ import NewUser from "./components/NewUser/NewUser";
 import UserList from "./components/UserList/UserList";
 
 function App() {
-  const [users, setUsers] = useState([
-    { id: "u1", name: "ahmet", age: 27 },
-    { id: "u2", name: "aleyna", age: 22 },
-  ]);
+  const [users, setUsers] = useState([]);
 
   const addUserHandler = (user) => {
-    setUsers((prevState) => [user, ...prevState]);    
+    setUsers((prevState) => [user, ...prevState]);
+  };
+
+  const removeHandler = (user) => {
+    setUsers((prevState) => {
+      let index = prevState.indexOf(user);
+      if (index !== -1) {
+        prevState.splice(index, 1);
+      }
+
+      return [...prevState];
+    });
   };
 
   return (
@@ -19,7 +27,7 @@ function App() {
         <NewUser onAddUser={addUserHandler} />
       </section>
       <section className={styles["user-list"]}>
-        <UserList users={users} />
+        <UserList onRemove={removeHandler} users={users} />
       </section>
     </div>
   );
