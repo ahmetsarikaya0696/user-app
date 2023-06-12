@@ -1,0 +1,29 @@
+.modal{
+  position: fixed;
+  top: 2rem;
+  left: 21rem;
+  width: 34rem;
+  max-width: 90%;
+  margin: 1rem auto;
+  padding: 0;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  background-color: white;
+}
+
+.title{
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  color: white;
+  font-weight: bold;
+  background: #8b005d;
+  padding: .5rem;
+}
+
+.errorMessage{
+  margin: 2rem;
+}
+
+.btn{
+  margin: 1rem;
+}
