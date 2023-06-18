@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, Fragment } from "react";
 import styles from "./App.module.css";
 import NewUser from "./components/NewUser/NewUser";
 import UserList from "./components/UserList/UserList";
@@ -35,7 +35,7 @@ function App() {
   };
 
   return (
-    <div>
+    <Fragment>
       <section className={styles["new-user"]}>
         <NewUser onOpenModal={openModalHandler} onAddUser={addUserHandler} />
       </section>
@@ -43,7 +43,7 @@ function App() {
         <UserList onRemove={removeHandler} users={users} />
       </section>
       {showModal && <Modal onModalClose={closeModalHandler} title="Invalid User!" errorMessage={errorMessage} />}
-    </div>
+    </Fragment>
   );
 }
 

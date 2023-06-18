@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { Fragment, useState } from "react";
 import styles from "./NewUser.module.css";
 import Button from "../UI/Button";
 
@@ -40,7 +40,7 @@ const NewUser = (props) => {
   };
 
   return (
-    <div>
+    <Fragment>
       <form onSubmit={submitHandler}>
         <div className={`${styles["form-control"]}`}>
           <label>Name</label>
@@ -54,7 +54,7 @@ const NewUser = (props) => {
 
         <Button type="submit">Add User</Button>
       </form>
-    </div>
+    </Fragment>
   );
 };
 
