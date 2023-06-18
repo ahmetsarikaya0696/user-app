@@ -1,42 +1,41 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useRef } from "react";
 import styles from "./NewUser.module.css";
 import Button from "../UI/Button";
 
 const NewUser = (props) => {
-  const [name, setName] = useState("");
-  const [age, setAge] = useState(0);
-
-  const changeHandler = (event) => {
-    if (event.target.type === "text") {
-      setName(event.target.value.toString());
-    } else {
-      setAge(+event.target.value);
-    }
-  };
+  const nameInputRef = useRef();
+  const ageInputRef = useRef();
 
   const submitHandler = (event) => {
     event.preventDefault();
 
-    const isNameValid = name.trim().length !== 0;
-    const isAgeValid = age > 0;
+    const enteredName = nameInputRef.current.value;
+    const enteredAge = ageInputRef.current.value;
+
+    const isNameValid = enteredName.trim().length !== 0;
+    const isAgeValid = enteredAge > 0;
 
     let errorMessage = "";
 
     if (!isNameValid && !isAgeValid) {
-      errorMessage += "Name field can not be empty!, Age field cannot be 0 or less!";
+      errorMessage +=
+        "Name field can not be empty!, Age field cannot be 0 or less!";
     } else if (!isNameValid) {
       errorMessage += " Name field can not be empty!";
     } else if (!isAgeValid) {
       errorMessage += " Age field cannot be 0 or less!";
     }
 
-    if(errorMessage !== ""){
+    if (errorMessage !== "") {
       props.onOpenModal(errorMessage);
       return;
     }
 
-    const user = { id: Math.random().toString(), name: name, age: age };
+    const user = { id: Math.random().toString(), name: enteredName, age: enteredAge };
     props.onAddUser(user);
+
+    nameInputRef.current.value = "";
+    ageInputRef.current.value = "";
   };
 
   return (
@@ -44,12 +43,20 @@ const NewUser = (props) => {
       <form onSubmit={submitHandler}>
         <div className={`${styles["form-control"]}`}>
           <label>Name</label>
-          <input onChange={changeHandler} type="text" value={name} />
+          <input
+            id="username"
+            type="text"
+            ref={nameInputRef}
+          />
         </div>
 
         <div className={`${styles["form-control"]}`}>
           <label>Age</label>
-          <input onChange={changeHandler} type="number" value={age} />
+          <input
+            id="age"
+            type="number"
+            ref={ageInputRef}
+          />
         </div>
 
         <Button type="submit">Add User</Button>
